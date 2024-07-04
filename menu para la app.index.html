@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menú con Contenido Dinámico</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+  }
+  
+  .menu-icon {
+    width: 30px;
+    height: 20px;
+    position: fixed;
+    top: 20px; /* Ajusta la posición vertical según tu diseño */
+    left: 20px; /* Ajusta la posición lateral según tu diseño */
+    cursor: pointer;
+    z-index: 1000; /* Ajusta según sea necesario */
+  }
+  
+  .line {
+    width: 100%;
+    height: 3px;
+    background-color: #fff; /* Color de las líneas */
+    margin: 5px 0;
+    border-radius: 2px;
+    transition: transform 0.3s ease;
+  }
+  
+  /* Efecto de transformación */
+  .menu-icon.open .line-1 {
+    transform: rotate(-45deg) translate(-5px, 5px);
+  }
+  
+  .menu-icon.open .line-2 {
+    opacity: 0;
+  }
+  
+  .menu-icon.open .line-3 {
+    transform: rotate(45deg) translate(-5px, -5px);
+  }
+  
+  /* Estilo de hover opcional */
+  .menu-icon:hover .line {
+    background-color: #ccc; /* Color de las líneas al pasar el mouse */
+  }
+  
+  .menu {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Inicialmente fuera de la pantalla */
+    width: 250px;
+    height: 100%;
+    background-color: #111;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+    transition: left 0.3s ease;
+    z-index: 999; /* Ajusta según sea necesario */
+    padding-top: 60px; /* Ajuste para dejar espacio para el título */
+  }
+  
+  .menu.open {
+    left: 0; /* Mostrar el menú */
+  }
+  
+  .menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .menu ul li {
+    padding: 15px 20px;
+    font-size: 16px;
+    border-bottom: 1px solid #333;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .menu ul li:hover {
+    background-color: #333;
+  }
+  
+  .menu ul li:first-child {
+    padding-top: 20px;
+  }
+  
+  .menu ul li:last-child {
+    border-bottom: none;
+  }
+  
+  .menu .menu-title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  
+  
+  
+  .content iframe {
+    width: 100%;
+    height: calc(110vh - 60px); /* Tamaño de la ventana de contenido */
+    border: none;
+  }
+</style>
+</head>
+<body>
+    
+
+<div class="menu-icon" onclick="toggleMenu()">
+  <div class="line line-1"></div>
+  <div class="line line-2"></div>
+  <div class="line line-3"></div>
+</div>
+
+<div class="menu" id="menu">
+  <div class="menu-title">Menú</div>
+  <ul>
+    <li onclick="loadPage('https://www.flixy.uno/Peliculas')">Peliculas</li>
+    <li onclick="loadPage('https://www.flixy.uno/Teror')">Terror</li>
+    <li onclick="loadPage('https://www.example.com/peliculas')">Infantil</li>
+    <li onclick="loadPage('https://www.example.com/mi-lista')">Series</li>
+    <li onclick="loadPage('https://www.example.com/ajustes')">Dorama</li>
+    <li onclick="loadPage('https://www.example.com/cerrar-sesion')">Cerrar Sesión</li>
+  </ul>
+
+</div>
+
+<div class="content" id="content">
+  <!-- Contenido inicial o por defecto -->
+  <iframe id="contentFrame" src="https://www.netflix.com" frameborder="0"></iframe>
+</div>
+
+<script>
+function toggleMenu() {
+  var menuIcon = document.querySelector('.menu-icon');
+  var menu = document.getElementById('menu');
+  
+  menuIcon.classList.toggle('open');
+  menu.classList.toggle('open');
+}
+
+function loadPage(url) {
+  var contentFrame = document.getElementById('contentFrame');
+  contentFrame.src = url;
+  toggleMenu(); // Cierra el menú después de hacer clic en un enlace
+}
+</script>
+
+</body>
+</html>
