@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargando...</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #000000;
+        }
+        .hidden {
+            display: none;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #222222;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+            display: none; /* No mostrar hasta que se cargue el GIF */
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"], input[type="password"] {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #ff0000;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        .message {
+            margin-top: 10px;
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Carga inicial con el GIF -->
+    <div id="cargando"><center>
+        <img src="Multimedia/loader_rojo.gif" alt="Cargando..." style="max-width: 70%; max-height: 100%;"></center>
+        <script>
+            setTimeout(function() {
+                document.getElementById('cargando').style.display = 'none';
+                document.getElementById('contenido').style.display = 'block';
+            }, 7000); // 5000 milisegundos = 5 segundos
+        </script>
+    </div>
+
+    <!-- Contenido principal después de la carga -->
+    <div id="contenido" class="container">
+        <center><img src="Multimedia/estepol.gif alt="Logo" style="max-width: 50%;">
+        <h2>Bienvenido </h2></center>
+        <h2>free  </h2></center>
+        <form id="loginForm" onsubmit="return validarFormulario()">
+            <input type="text" id="username" name="username" placeholder="Usuario" required>
+            <input type="password" id="password" name="password" placeholder="Contraseña" required>
+            <input type="submit" value="Iniciar sesión">
+            <p class="message" id="errorMessage"></p>
+        </form>
+    </div>
+
+    <!-- Script para la validación del formulario -->
+    <script>
+
+        
+       
+
+        function validarFormulario() {
+            var usuarios = [
+            { username: "kuko", password: "kuko" }
+            { username: "kipol", password: "kipol" }
+            // Aquí puedes agregar la lógica para verificar usuario y contraseña
+            // Por ejemplo, comparar con valores predefinidos o hacer una solicitud a un servidor
+
+            // Ejemplo básico:
+            if (username === "usuario" && password === "contraseña") {
+                window.location.href = 'seccion-privada.html'; // Redirigir a la sección privada
+                return false; // Evitar que el formulario se envíe realmente
+            } else {
+                document.getElementById("errorMessage").textContent = "Usuario o contraseña incorrectos.";
+                return false; // Evitar que el formulario se envíe realmente
+            }
+        }
+    </script>
+</body>
+</html>
